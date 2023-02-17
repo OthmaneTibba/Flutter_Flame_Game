@@ -2,6 +2,7 @@ import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
+import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_game/components/knife.dart';
 import 'package:simple_game/components/player.dart';
@@ -14,6 +15,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Flame.device.fullScreen();
   await Flame.device.setPortrait();
+
   final myGame = MyGame();
   runApp(
     GameWidget(
@@ -32,6 +34,7 @@ class MyGame extends FlameGame with HasTappables, HasCollisionDetection {
   late Player player;
   late Wall rightWall;
   late Wall leftWall;
+
   @override
   Future<void> onLoad() async {
     camera.viewport = FixedResolutionViewport(
@@ -67,6 +70,7 @@ class MyGame extends FlameGame with HasTappables, HasCollisionDetection {
     );
     add(KnifeSpawner());
     children.register<Knife>();
+    FlameAudio.bgm.play('SwingingPants.ogg');
     await super.onLoad();
   }
 
@@ -101,6 +105,7 @@ class MyGame extends FlameGame with HasTappables, HasCollisionDetection {
     children.query<Knife>().forEach((element) {
       element.removeFromParent();
     });
+    FlameAudio.bgm.play('SwingingPants.ogg');
     overlays.remove(GameOver.gameOverId);
     resumeEngine();
   }

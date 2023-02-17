@@ -1,5 +1,6 @@
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
+import 'package:flame_audio/flame_audio.dart';
 import 'package:simple_game/components/knife.dart';
 import 'package:simple_game/components/wall.dart';
 import 'package:simple_game/config/game_config.dart';
@@ -127,6 +128,7 @@ class Player extends SpriteAnimationComponent
     if (other is Knife) {
       if (other.absoluteCenter.y < absolutePosition.y) {
         gameRef.pauseEngine();
+        FlameAudio.bgm.stop();
         // show game over
         gameRef.overlays.add(GameOver.gameOverId);
       }
