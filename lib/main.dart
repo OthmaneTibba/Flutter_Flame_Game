@@ -15,6 +15,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Flame.device.fullScreen();
   await Flame.device.setPortrait();
+  await FlameAudio.audioCache.load('SwingingPants.ogg');
 
   final myGame = MyGame();
   runApp(
